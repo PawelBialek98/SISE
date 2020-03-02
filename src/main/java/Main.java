@@ -12,9 +12,11 @@ public class Main {
         long timeStart;
         long timeStop;
         SolverBFS solverBFS = new SolverBFS();
+        SolverDFS solverDFS = new SolverDFS();
         Puzzle.DIRECTION[] strategy = {Puzzle.DIRECTION.RIGHT, Puzzle.DIRECTION.DOWN, Puzzle.DIRECTION.UP, Puzzle.DIRECTION.LEFT};
         timeStart = System.nanoTime();
-        Puzzle solvedPuzzle = solverBFS.solve(puzzle, strategy);
+        //Puzzle solvedPuzzle = solverBFS.solve(puzzle, strategy);
+        Puzzle solvedPuzzle = solverDFS.solve(puzzle,strategy,0);
         timeStop = System.nanoTime();
         System.out.println("------- AFTER -------");
         System.out.println(solvedPuzzle);

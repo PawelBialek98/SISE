@@ -12,7 +12,7 @@ public class PuzzleSaver {
                     if (puzzle == null) {
                         bw.write(-1);
                     }
-                    bw.write(Integer.toString(puzzle.getPath().length()) + "\n");
+                    bw.write(puzzle.getPath().length() + "\n");
                     bw.write(puzzle.getPath());
                     break;
             }

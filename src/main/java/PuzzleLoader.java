@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.IOException;
 
 public class PuzzleLoader {
     public int[][] load(String fileName) {
@@ -22,7 +23,7 @@ public class PuzzleLoader {
             }
             br.close();
             return puzzle;
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

@@ -4,7 +4,7 @@ public class Main {
         Puzzle puzzle;
         int[][] correctPuzzle;
         int[][] puzzleToSolve;
-        puzzleToSolve = puzzleLoader.load("puzzleToSolve.txt");
+        puzzleToSolve = puzzleLoader.load("puzzleToSolve2.txt");
         correctPuzzle = generateCorrectPuzzle(puzzleToSolve.length, puzzleToSolve[0].length);
         puzzle = new Puzzle(puzzleToSolve, correctPuzzle);
         System.out.println("------- BEFORE -------");

@@ -11,7 +11,7 @@ public class SolverDFS {
         if (puzzle.isSolved()) {
             return puzzle;
         }
-        if (depth >= 15) {
+        if (depth >= 3) {
             System.out.println("No nie siadło panie");
             return null;
         }
@@ -22,7 +22,7 @@ public class SolverDFS {
                 System.out.println(strategy[i]);
                 newPuzzle = solve(newPuzzle, strategy, ++depth);
                 // tutaj jest problem jak dochodzi do 'dna' to zwraca null (linia 16) i błednie  go obsługuje
-                if(newPuzzle.isSolved()){
+                if(newPuzzle != null && newPuzzle.isSolved()){
                     return newPuzzle;
                 }
             }

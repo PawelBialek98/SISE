@@ -1,40 +1,40 @@
 public class Main {
     public static void main(String[] args) {
-        /*if (args.length == 0) {
+
+        if (args.length == 0) {
             System.out.println("Brak argumentów wywołania");
             System.exit(1);
         }
-        Solver solver;
-        switch (args[0]){
-            case "bfs": solver = new SolverBFS();
-                break;
-            case "dfs": solver = new SolverDFS();
-                break;
-            case "astr": //TODO dodac przypisanie
-                break;
-            default:
-                System.out.println("Niepoprawny akronim algorytmu");
-
-        }*/
         PuzzleLoader puzzleLoader = new PuzzleLoader();
         Puzzle puzzle;
         int[][] correctPuzzle;
         int[][] puzzleToSolve;
-        puzzleToSolve = puzzleLoader.load("puzzleToSolve.txt");
+        puzzleToSolve = puzzleLoader.load(args[2]);
         correctPuzzle = generateCorrectPuzzle(puzzleToSolve.length, puzzleToSolve[0].length);
         puzzle = new Puzzle(puzzleToSolve, correctPuzzle);
         System.out.println("------- BEFORE -------");
         System.out.println(puzzle);
         long timeStart;
         long timeStop;
-        SolverBFS solverBFS = new SolverBFS();
-        SolverDFS solverDFS = new SolverDFS();
+        Solver solver = null;
+        switch (args[0]){
+            case "bfs":
+                solver = new SolverBFS();
+                break;
+            case "dfs":
+                solver = new SolverDFS();
+                break;
+            case "astr": //TODO dodac przypisanie
+                break;
+            default:
+                System.out.println("Niepoprawny akronim algorytmu");
+                System.exit(2);
+        }
         StrategyReader sr = new StrategyReader();
-        Puzzle.DIRECTION[] strategy = sr.read("DRUL");
-        //Puzzle.DIRECTION[] strategy = {Puzzle.DIRECTION.RIGHT, Puzzle.DIRECTION.DOWN, Puzzle.DIRECTION.UP, Puzzle.DIRECTION.LEFT};
+        Puzzle.DIRECTION[] strategy = sr.read(args[1]);
         timeStart = System.nanoTime();
         //Puzzle solvedPuzzle = solverBFS.solve(puzzle, strategy);
-        Puzzle solvedPuzzle = solverDFS.solve(puzzle,strategy);
+        Puzzle solvedPuzzle = solver.solve(puzzle,strategy);
         timeStop = System.nanoTime();
         System.out.println("------- AFTER -------");
         System.out.println(solvedPuzzle);
@@ -42,7 +42,7 @@ public class Main {
         System.out.println("Path length: " + solvedPuzzle.getPath().length());
         System.out.println("Solved in: " + ((timeStop - timeStart) / 1000) / 1000.0 + "ms");
         PuzzleSaver ps = new PuzzleSaver();
-        ps.save("siusiak.txt", "dfs", solvedPuzzle);
+        ps.save(args[3], args[0], solvedPuzzle);
     }
     private static int[][] generateCorrectPuzzle(int xSize, int ySize) {
         int[][] correctPuzzle = new int[ySize][xSize];

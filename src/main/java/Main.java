@@ -1,5 +1,21 @@
 public class Main {
     public static void main(String[] args) {
+        /*if (args.length == 0) {
+            System.out.println("Brak argumentów wywołania");
+            System.exit(1);
+        }
+        Solver solver;
+        switch (args[0]){
+            case "bfs": solver = new SolverBFS();
+                break;
+            case "dfs": solver = new SolverDFS();
+                break;
+            case "astr": //TODO dodac przypisanie
+                break;
+            default:
+                System.out.println("Niepoprawny akronim algorytmu");
+
+        }*/
         PuzzleLoader puzzleLoader = new PuzzleLoader();
         Puzzle puzzle;
         int[][] correctPuzzle;
@@ -16,15 +32,15 @@ public class Main {
         StrategyReader sr = new StrategyReader();
         Puzzle.DIRECTION[] strategy = sr.read("DRUL");
         //Puzzle.DIRECTION[] strategy = {Puzzle.DIRECTION.RIGHT, Puzzle.DIRECTION.DOWN, Puzzle.DIRECTION.UP, Puzzle.DIRECTION.LEFT};
-        //timeStart = System.nanoTime();
+        timeStart = System.nanoTime();
         //Puzzle solvedPuzzle = solverBFS.solve(puzzle, strategy);
-        Puzzle solvedPuzzle = solverDFS.solve(puzzle,strategy,0);
-        /*timeStop = System.nanoTime();
+        Puzzle solvedPuzzle = solverDFS.solve(puzzle,strategy);
+        timeStop = System.nanoTime();
         System.out.println("------- AFTER -------");
         System.out.println(solvedPuzzle);
         System.out.println("Path: " + solvedPuzzle.getPath());
         System.out.println("Path length: " + solvedPuzzle.getPath().length());
-        System.out.println("Solved in: " + ((timeStop - timeStart) / 1000) / 1000.0 + "ms");*/
+        System.out.println("Solved in: " + ((timeStop - timeStart) / 1000) / 1000.0 + "ms");
         PuzzleSaver ps = new PuzzleSaver();
         ps.save("siusiak.txt", "dfs", solvedPuzzle);
     }

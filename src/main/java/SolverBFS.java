@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class SolverBFS {
+public class SolverBFS implements Solver{
     private final Queue<Puzzle> frontiers = new LinkedList<>();
     public Puzzle solve(Puzzle puzzleToSolve, Puzzle.DIRECTION[] strategy) {
         frontiers.add(puzzleToSolve);

@@ -1,25 +1,26 @@
-import java.util.LinkedList;
-import java.util.Queue;
+public class SolverDFS implements Solver {
+    int depth = 0;
 
-public class SolverDFS {
-
-    //TODO poprawić metodę
-    public Puzzle solve(Puzzle puzzle, Puzzle.DIRECTION[] strategy, int depth) {
+    public Puzzle solve(Puzzle puzzle, Puzzle.DIRECTION[] strategy) {
         if (puzzle.isSolved()) {
             return puzzle;
         }
-        if (depth >= 23) {
+        if (depth >= 16) {
             return null;
         }
         for (int i = 0; i < strategy.length; i++) {
             if (puzzle.canMove(strategy[i])) {
                 Puzzle newPuzzle = new Puzzle(puzzle);
                 newPuzzle.move(strategy[i]);
-                newPuzzle = solve(newPuzzle, strategy, ++depth);
-                // tutaj jest problem jak dochodzi do 'dna' to zwraca null (linia 16) i błednie  go obsługuje
+                //depth to jest to samo co Path length - długość wykonania programu zwiększa sięwykładniczo zależnie od depth
+                depth++;
+                newPuzzle = solve(newPuzzle, strategy);
                 if(newPuzzle != null && newPuzzle.isSolved()){
+                    System.out.println(depth);
                     return newPuzzle;
+
                 }
+                depth--;
             }
         }
         return null;

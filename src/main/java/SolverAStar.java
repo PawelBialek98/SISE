@@ -23,7 +23,7 @@ public class SolverAStar implements Solver {
         return null;
     }
 
-    private int calculate(Puzzle puzzle, String strategy){
+    private void calculate(Puzzle puzzle, String strategy){
         int score = puzzle.getPath().length();
         score += (strategy.equals("hamm")) ?  calculateHamming(puzzle) : calculateManhattan(puzzle);
         puzzle.setScore(score);
@@ -67,5 +67,6 @@ public class SolverAStar implements Solver {
                 }
             }
         }
+        return null;
     }
 }

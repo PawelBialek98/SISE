@@ -28,4 +28,22 @@ public class PuzzleLoader {
         }
         return null;
     }
+
+    //chcialem to zrobic tutaj ale no niestety pass by value czyli sie nie zmienia
+    /*public void readArgs(Solver solver, Puzzle.DIRECTION[] strategy, String[] args){
+        switch (args[0]){
+            case "bfs":
+                solver = new SolverBFS();
+                strategy = StrategyReader.read(args[1]);
+                break;
+            case "dfs":
+                solver = new SolverDFS();
+                strategy = StrategyReader.read(args[1]);
+                break;
+            case "astr": //TODO dodac przypisanie
+                break;
+            default:
+                System.out.println("Niepoprawny akronim algorytmu");
+        }
+    }*/
 }

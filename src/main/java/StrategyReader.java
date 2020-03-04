@@ -1,6 +1,6 @@
 public class StrategyReader {
 
-    public Puzzle.DIRECTION[] read (String strategy){
+    public static Puzzle.DIRECTION[] read (String strategy){
         Puzzle.DIRECTION[] finalDir = new Puzzle.DIRECTION[strategy.length()];
         for(int i = 0; i < strategy.length(); i++){
             switch (strategy.charAt(i)){

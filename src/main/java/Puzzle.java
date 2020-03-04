@@ -6,6 +6,7 @@ public class Puzzle {
     private int[][] correctPuzzle;
     private String path = "";
     private int zeroX, zeroY;
+    private int score;
     public Puzzle(int[][] puzzle, int[][] correctPuzzle) {
         this.puzzle = puzzle;
         this.correctPuzzle = correctPuzzle;
@@ -105,6 +106,18 @@ public class Puzzle {
     public int[][] getPuzzle() {
         return puzzle;
     }
+    public int[][] getCorrectPuzzle() {
+        return correctPuzzle;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder();

@@ -17,7 +17,9 @@ public class Main {
                 solver = new SolverDFS();
                 strategy = StrategyReader.read(args[1]);
                 break;
-            case "astr": //TODO dodac przypisanie
+            case "astr":
+                solver = new SolverAStar();
+                ((SolverAStar) solver).setStrategy(args[1]);
                 break;
             default:
                 System.out.println("Niepoprawny akronim algorytmu");
@@ -38,8 +40,8 @@ public class Main {
         System.out.println("Path length: " + solvedPuzzle.getPath().length());
         System.out.println("Solved in: " + ((timeStop - timeStart) / 1000) / 1000.0 + "ms");*/
         PuzzleSaver ps = new PuzzleSaver(solvedPuzzle);
-        ps.save(args[3], "bfs");
-        ps.saveStats(args[4], timeStop, timeStart);
+        ps.save(args[3]);
+        ps.saveStats(args[4], timeStop, timeStart, solver);
     }
     private static int[][] generateCorrectPuzzle(int xSize, int ySize) {
         int[][] correctPuzzle = new int[ySize][xSize];

@@ -4,6 +4,31 @@ import java.util.Queue;
 public class SolverAStar implements Solver {
 
     private final Queue<Puzzle> frontiers = new LinkedList<>();
+
+    private String strategy;
+    private int processed = 0;
+    private int visited = 0;
+    private int depth = 0;
+
+    @Override
+    public int getDepth() {
+        return depth;
+    }
+
+    @Override
+    public int getProcessed(){
+        return processed;
+    }
+
+    @Override
+    public int getVisited() {
+        return visited;
+    }
+
+    public void setStrategy(String strategy) {
+        this.strategy = strategy;
+    }
+
     @Override
     public Puzzle solve(Puzzle puzzleToSolve, Puzzle.DIRECTION[] strategy) {
         /*frontiers.add(puzzleToSolve);
@@ -23,7 +48,7 @@ public class SolverAStar implements Solver {
         return null;
     }
 
-    private void calculate(Puzzle puzzle, String strategy){
+    private void calculate(Puzzle puzzle){
         int score = puzzle.getPath().length();
         score += (strategy.equals("hamm")) ?  calculateHamming(puzzle) : calculateManhattan(puzzle);
         puzzle.setScore(score);

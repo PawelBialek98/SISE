@@ -1,11 +1,13 @@
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 public class SolverAStar implements Solver {
 
-    private final Queue<Puzzle> frontiers = new LinkedList<>();
+    //private final Queue<Puzzle> frontiers = new LinkedList<>();
+    private Set<Puzzle> frontiers = new HashSet<>();
+    private Set<Puzzle> explored = new HashSet<>();
+    private Map<Integer, Puzzle> map = new HashMap<>();
 
-    private String strategy;
+    private boolean strategy;
     private int processed = 0;
     private int visited = 0;
     private int depth = 0;
@@ -26,55 +28,75 @@ public class SolverAStar implements Solver {
     }
 
     public void setStrategy(String strategy) {
-        this.strategy = strategy;
+        this.strategy = strategy.equals("hamm");
     }
 
     @Override
     public Puzzle solve(Puzzle puzzleToSolve, Puzzle.DIRECTION[] strategy) {
-        /*frontiers.add(puzzleToSolve);
-        while (!frontiers.isEmpty()) {
-            Puzzle puzzle = frontiers.poll();
+        calculate(puzzleToSolve);
+
+        while (!frontiers.isEmpty()){
+            Puzzle puzzle = Collections.min(frontiers, Comparator.comparing(Puzzle::getScore));
+            frontiers.remove(puzzle);
+
+            depth = Math.max(depth, puzzle.getPath().length());
             if (puzzle.isSolved()) {
                 return puzzle;
             }
+
             for (int i = 0; i < strategy.length; i++) {
                 if (puzzle.canMove(strategy[i])) {
                     Puzzle newPuzzle = new Puzzle(puzzle);
                     newPuzzle.move(strategy[i]);
-                    frontiers.add(newPuzzle);
+                    calculate(newPuzzle);
+                    //System.out.println("score" + newPuzzle.getScore());
                 }
             }
-        }*/
+            processed++;
+            //System.out.println("next" + nextPuzzle.getScore());
+            //System.out.println(puzzle);
+            //System.out.println(processed);
+            //System.out.println("Best score" + puzzle.getScore());
+            //frontiers.add(nextPuzzle);
+            //if(processed == 20){
+            //    return null;
+            //}
+        }
         return null;
     }
 
     private void calculate(Puzzle puzzle){
-        int score = puzzle.getPath().length();
-        score += (strategy.equals("hamm")) ?  calculateHamming(puzzle) : calculateManhattan(puzzle);
-        puzzle.setScore(score);
+        if(puzzle != null && explored.add(puzzle)){
+            int score = puzzle.getPath().length();
+            score += strategy ?  calculateHamming(puzzle) : calculateManhattan(puzzle);
+            puzzle.setScore(score);
+            frontiers.add(puzzle);
+            visited++;
+        }
     }
 
     private int calculateHamming(Puzzle puzzle){
         int dist = 0;
-        int[][] puzzleXD = puzzle.getPuzzle();
-        for (int y = 0; y < puzzleXD.length; ++y) {
-            for (int x = 0; x < puzzleXD[y].length; ++x) {
-                if (puzzleXD[y][x] != puzzle.getCorrectPuzzle()[y][x]) {
+        int[][] puzzleTmp = puzzle.getPuzzle();
+        for (int y = 0; y < puzzleTmp.length; ++y) {
+            for (int x = 0; x < puzzleTmp[y].length; ++x) {
+                if (puzzleTmp[y][x] != puzzle.getCorrectPuzzle()[y][x]) {
                     dist++;
                 }
             }
         }
+        //System.out.println("XD");
         return dist;
     }
 
     private int calculateManhattan(Puzzle puzzle){
-        int yCorrect, xCorrect, dist = 0;
-        int[][] puzzleXD = puzzle.getPuzzle();
+        int dist = 0;
+        int[][] puzzleTmp = puzzle.getPuzzle();
         int[] coTOzaguwno;
-        for (int y = 0; y < puzzleXD.length; ++y) {
-            for (int x = 0; x < puzzleXD[y].length; ++x) {
-                if (puzzleXD[y][x] != puzzle.getCorrectPuzzle()[y][x]) {
-                    coTOzaguwno = calculateCoordinates(puzzle,puzzleXD[y][x]);
+        for (int y = 0; y < puzzleTmp.length; ++y) {
+            for (int x = 0; x < puzzleTmp[y].length; ++x) {
+                if (puzzleTmp[y][x] != puzzle.getCorrectPuzzle()[y][x]) {
+                    coTOzaguwno = calculateCoordinates(puzzle,puzzleTmp[y][x]);
                     dist += Math.abs(y-coTOzaguwno[0]) + Math.abs(x-coTOzaguwno[1]);
                 }
             }
@@ -84,7 +106,7 @@ public class SolverAStar implements Solver {
 
     private int[] calculateCoordinates(Puzzle puzzle,int number){
 
-        int[][] puzzleXD = puzzle.getPuzzle();
+        int[][] puzzleXD = puzzle.getCorrectPuzzle();
         for (int y = 0; y < puzzleXD.length; ++y) {
             for (int x = 0; x < puzzleXD[y].length; ++x) {
                 if (puzzleXD[y][x] == number) {

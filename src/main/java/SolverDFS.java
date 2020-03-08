@@ -23,23 +23,26 @@ public class SolverDFS implements Solver {
         if (puzzle.isSolved()) {
             return puzzle;
         }
-        if (depth >= 16) {
+        depth = Math.max(depth,puzzle.getPath().length());
+        if (puzzle.getPath().length() >= 20) {
             return null;
         }
+        processed++;
         for (int i = 0; i < strategy.length; i++) {
             if (puzzle.canMove(strategy[i])) {
                 Puzzle newPuzzle = new Puzzle(puzzle);
                 newPuzzle.move(strategy[i]);
-                processed++;
+                //processed++;
                 //depth to jest to samo co Path length - długość wykonania programu zwiększa sięwykładniczo zależnie od depth
-                depth++;
+
+                visited++;
                 newPuzzle = solve(newPuzzle, strategy);
                 if(newPuzzle != null && newPuzzle.isSolved()){
-                    System.out.println(depth);
+                    //System.out.println(depth);
                     return newPuzzle;
 
                 }
-                depth--;
+                //depth--;
             }
         }
         return null;

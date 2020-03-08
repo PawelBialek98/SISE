@@ -20,6 +20,7 @@ public class Main {
             case "astr":
                 solver = new SolverAStar();
                 ((SolverAStar) solver).setStrategy(args[1]);
+                strategy = StrategyReader.read("URDL");
                 break;
             default:
                 System.out.println("Niepoprawny akronim algorytmu");

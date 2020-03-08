@@ -24,13 +24,14 @@ public class SolverBFS implements Solver{
         frontiers.add(puzzleToSolve);
         while (!frontiers.isEmpty()) {
             Puzzle puzzle = frontiers.poll();
-            visited++;
+            processed++;
+            depth = Math.max(depth, puzzle.getPath().length());
             if (puzzle.isSolved()) {
                 return puzzle;
             }
             for (int i = 0; i < strategy.length; i++) {
                 if (puzzle.canMove(strategy[i])) {
-                    processed++;
+                    visited++;
                     Puzzle newPuzzle = new Puzzle(puzzle);
                     newPuzzle.move(strategy[i]);
                     frontiers.add(newPuzzle);

@@ -24,7 +24,7 @@ public class SolverDFS implements Solver {
             return puzzle;
         }
         depth = Math.max(depth,puzzle.getPath().length());
-        if (puzzle.getPath().length() >= 20) {
+        if (puzzle.getPath().length() >= 12) {
             return null;
         }
         processed++;
@@ -32,17 +32,11 @@ public class SolverDFS implements Solver {
             if (puzzle.canMove(strategy[i])) {
                 Puzzle newPuzzle = new Puzzle(puzzle);
                 newPuzzle.move(strategy[i]);
-                //processed++;
-                //depth to jest to samo co Path length - długość wykonania programu zwiększa sięwykładniczo zależnie od depth
-
                 visited++;
                 newPuzzle = solve(newPuzzle, strategy);
                 if(newPuzzle != null && newPuzzle.isSolved()){
-                    //System.out.println(depth);
                     return newPuzzle;
-
                 }
-                //depth--;
             }
         }
         return null;

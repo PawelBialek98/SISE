@@ -24,6 +24,7 @@ public class SolverDFS implements Solver {
             return puzzle;
         }
         depth = Math.max(depth,puzzle.getPath().length());
+        //5064 - maksymalna glebokosc na jakiej dziala
         if (puzzle.getPath().length() >= 12) {
             return null;
         }

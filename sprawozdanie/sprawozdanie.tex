@@ -36,7 +36,7 @@ Piętnastka jest to układanka zbudowana z ramki 4x4  i znajdujących się w nie
 \begin{figure}
 \centering
 \includegraphics [scale=0.15]{1024px-15-puzzle.svg}
-\caption{Rysunek1. Rozwiązana układanka.}
+\caption{Rozwiązana układanka.}
 \end{figure}
 \newpage
 W celu rozwiązania układanki użyto trzech metod przeszukiwania stanów:
@@ -51,11 +51,26 @@ W celu rozwiązania układanki użyto trzech metod przeszukiwania stanów:
 \end{enumerate}}
 
 \section{Opis implementacji}
-{\color{blue}
-Należy tu zamieścić krótki i zwięzły opis zaprojektowanych klas oraz powiązań
-między nimi. Powinien się tu również znaleźć diagram UML (diagram klas)
-prezentujący najistotniejsze elementy stworzonej aplikacji. Należy także podać,
-w jakim języku programowania została stworzona aplikacja.}
+Program jest aplikacją konsolową napisaną w języku Java. Aby go uruchomić należy mieć zainstalowaną maszynę wirtualną javy oraz podać 5 parametrów podczas uruchamiania:
+\begin{enumerate}
+\item akronim określający wybraną strategię (bfs, dfs, astr)
+\item dodatkowy parametr wybranej strategii:
+\begin{itemize}
+\item DFS I BFS - akronim liter R,L,U,D określający kolejność przeszukiwania (Right, Left, Up, Down)
+\item A* - hamm dla heurystyki Hamminga, manh dla heurystyki Manhattan
+\end{itemize}
+\item nazwa pliku tekstowego z zadanym układem początkowym układanki
+\item nazwa pliku tekstowego, w którym ma zostać zapisane rozwiązanie
+\item nazwa pliku tekstowego, w którym mają zostać zapisane dodatkowe informacje dotyczące przeprowadzonego procesu obliczeniowego
+\end{enumerate}
+Na poniższym diagramie zaprezentowano strukturę aplikacji. Klasa Puzzle odpowiada za przechowywanie informacji o układzie planszy, a także pozwala na wyliczenie i wykonanie możliwych ruchów oraz porównanie przechowywanego układu do oczekiwanego układu. Klasy SolverBFS, SolverDFS i SolverAStar implementują algorytmy wykorzystywane do rozwiązywania puzzli zgodne z nazwą klasy. Klasy PuzzleLoader i PuzzleSaver odpowiadają odpowiednio za wczytanie planszy z odpowiednio skonstruowanego pliku oraz zapis do pliku wynikowego oraz pliku ze szczegółowymi informacjami o wykonaniu programu.
+\newpage
+\begin{figure}
+\centering
+\includegraphics [scale=0.2]{SISE_Zad1_UML}
+\caption{Diagram UML zawierający klasy aplikacji.}
+\end{figure}
+
 
 \section{Materiały i metody}
 {\color{blue}

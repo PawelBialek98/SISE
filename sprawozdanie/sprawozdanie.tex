@@ -158,20 +158,20 @@ Następnie program uruchamiany jest dla każdej układanki i wszystkich możliwy
 \end{enumerate}
 }
 
+\newpage
 \section{Wnioski}
-{\color{blue}
-W tej, przedostatniej, sekcji należy zamieścić podsumowanie najważniejszych
-wniosków z sekcji poprzedniej. Najlepiej jest je po prostu wypunktować. Znów,
-tak jak poprzednio, najistotniejsze są wnioski o charakterze uniwersalnym.}
+\begin{enumerate}
+\item Różnica liczb stanów odwiedzonych i przetworzonych dla poszczególnych algorytmów jest znacząca. Najgorzej w obu przypadkach wypada strategia przeszukiwania w głąb, gdzie względem najlepszego A* (w obu badanych metodykach) jest to różnica kilku rzędów wielkości.
+\item W przypadku strategii A*obie rozważane metodyki prezentują podobną wydajność. Różnice można zauważyć w przypadku liczby odwiedzonych i przetworzonych stanów, szczególne przy większych głębokościach.
+\item Zdecydowanie najgorzej wypadającą strategią znajdywania rozwiązania dla "Piętnastki" jest metoda przeszukiwania w głąb (DFS), która wypada najgorzej pod każdym badanym względem.
+\item Za najwydajniesze rozwiązanie można uznać strategię A*. Obie zastosowane metodyki wykazały się znacznie lepszą wydajnością niż strategie \textit{brute force} - BFS i DFS.
+\end{enumerate}
 
 \begin{thebibliography}{0}
   \bibitem{l2short} T. Oetiker, H. Partl, I. Hyna, E. Schlegl.
     \textsl{Nie za krótkie wprowadzenie do systemu \LaTeX2e}, 2007, dostępny
     online.
+  \bibitem{l2short} \url{https://en.wikipedia.org/wiki/A*_search_algorithm}
+  
 \end{thebibliography}
-
-{\color{blue}
-Na końcu należy obowiązkowo podać cytowaną w sprawozdaniu literaturę, z której
-grupa korzystała w trakcie prac nad zadaniem.}
-
 \end{document}

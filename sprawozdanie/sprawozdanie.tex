@@ -76,17 +76,26 @@ Na poniższym diagramie zaprezentowano strukturę aplikacji. Klasa Puzzle odpowi
 {Badania zostały przeprowadzone, na wszystkich możliwych układach do głębokości równej 7. W celu utworzenia tych układanek użyto generatora udostępnionego na platformie WIKAMP.
 Następnie program uruchamiany jest dla każdej układanki i wszystkich możliwych strategii i parametrów je opisujących. Po otrzymaniu rezultatów dla wszystkich analizowanych przypadków, z utworzonych danych zostały stworzone wykresy, które zostaną przedstawionę w następnym punkcie sprawozdania. Ponieważ ilość analizowanych przypadków jest bardzo duża, w celu zebrania wszystkich danych i utworzenia odpowiednich wykresów napisano skrypt w języku python.}
 
+\newpage
 \section{Wyniki}
-{\color{blue}
-W tej sekcji należy zaprezentować, dla każdego przeprowadzonego eksperymentu,
-kompletny zestaw wyników w postaci tabel, wykresów (preferowane) itp. Powinny
-być one tak ponazywane, aby było wiadomo, do czego się odnoszą. Wszystkie
-tabele i wykresy należy oczywiście opisać (opisać co jest na osiach, w
-kolumnach itd.) stosując się do przyjętych wcześniej oznaczeń. Nie należy tu
-komentować i interpretować wyników, gdyż miejsce na to jest w kolejnej sekcji.
-Tu również dobrze jest wprowadzić oznaczenia (tabel, wykresów), aby móc się do
-nich odwoływać poniżej.}
-
+{
+\begin{figure}[h]
+\centering
+\includegraphics [scale=0.5]{dlugosc_AStar}
+\caption{Wykres przedstawiający średnią długość rozwiązania dla strategii A*}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{dlugosc_BFS}
+\caption{Wykres przedstawiający średnią długość rozwiązania dla strategii BFS}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{dlugosc_DFS}
+\caption{Wykres przedstawiający średnią długość rozwiązania dla strategii DFS}
+\end{figure}
+}
+\newpage
 \section{Dyskusja}
 {\color{blue}
 Sekcja ta powinna zawierać dokładną interpretację uzyskanych wyników

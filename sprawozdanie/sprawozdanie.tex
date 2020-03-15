@@ -45,8 +45,8 @@ W celu rozwiązania układanki użyto trzech metod przeszukiwania stanów:
 \item Strategii przeszukiwania "w głąb" (DFS) - polega ona na przeszukiwaniu wszystkich wierzchołków w danym korzeniu począwszy od stanu początkowego, po odwiedzeniu wszystkich wierzchołków przechodzi do następnego korzenia, aż do odnalezienia rozwiązania. 
 \item Strategii "najpierw najlepszy": A*, z następującymi heurystykami: 
 \begin{itemize}
-\item metryką Hamminga - definicja
-\item metryką Manhattan - definicja 
+\item metryką Hamminga - w tym przypadku bierzemy pod uwagę wszystkie możliwe ruchy do wykonania i porównujemy ile pól znajduje się na swoim miejscu po wykonaninu danego ruchu. Wybieramy to ustawienie, gdzie najwięcej pól znajduje się na prawidłowych pozycjach.
+\item metryką Manhattan - w tym przypadku również bierzemy pod uwagę wszystkie możliwe ruchy do wykonania w następnym kroku, jednak wybiermy to ustawienie w którym suma odległości wszystkich pól od ich prawidłowej pozycji jest najmniejsza.
 \end{itemize}
 \end{enumerate}}
 
@@ -161,7 +161,7 @@ Następnie program uruchamiany jest dla każdej układanki i wszystkich możliwy
 \newpage
 \section{Wnioski}
 \begin{enumerate}
-\item Różnica liczb stanów odwiedzonych i przetworzonych dla poszczególnych algorytmów jest znacząca. Najgorzej w obu przypadkach wypada strategia przeszukiwania w głąb, gdzie względem najlepszego A* (w obu badanych metodykach) jest to różnica kilku rzędów wielkości.
+\item Różnica liczb stanów odwiedzonych i przetworzonych dla poszczególnych algorytmów jest znacząca. Najgorzej w obu przypadkach wypada strategia przeszukiwania w głąb, gdzie względem najlepszego A* (w obu badanych metrykach) jest to różnica kilku rzędów wielkości.
 \item W przypadku strategii A*obie rozważane metodyki prezentują podobną wydajność. Różnice można zauważyć w przypadku liczby odwiedzonych i przetworzonych stanów, szczególne przy większych głębokościach.
 \item Zdecydowanie najgorzej wypadającą strategią znajdywania rozwiązania dla "Piętnastki" jest metoda przeszukiwania w głąb (DFS), która wypada najgorzej pod każdym badanym względem.
 \item Za najwydajniesze rozwiązanie można uznać strategię A*. Obie zastosowane metodyki wykazały się znacznie lepszą wydajnością niż strategie \textit{brute force} - BFS i DFS.

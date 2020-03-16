@@ -45,8 +45,8 @@ W celu rozwiązania układanki użyto trzech metod przeszukiwania stanów:
 \item Strategii przeszukiwania "w głąb" (DFS) - polega ona na przeszukiwaniu wszystkich wierzchołków w danym korzeniu począwszy od stanu początkowego, po odwiedzeniu wszystkich wierzchołków przechodzi do następnego korzenia, aż do odnalezienia rozwiązania. 
 \item Strategii "najpierw najlepszy": A*, z następującymi heurystykami: 
 \begin{itemize}
-\item metryką Hamminga - definicja
-\item metryką Manhattan - definicja 
+\item metryką Hamminga - w tym przypadku bierzemy pod uwagę wszystkie możliwe ruchy do wykonania i porównujemy ile pól znajduje się na swoim miejscu po wykonaninu danego ruchu. Wybieramy to ustawienie, gdzie najwięcej pól znajduje się na prawidłowych pozycjach.
+\item metryką Manhattan - w tym przypadku również bierzemy pod uwagę wszystkie możliwe ruchy do wykonania w następnym kroku, jednak wybiermy to ustawienie w którym suma odległości wszystkich pól od ich prawidłowej pozycji jest najmniejsza.
 \end{itemize}
 \end{enumerate}}
 
@@ -124,33 +124,55 @@ Następnie program uruchamiany jest dla każdej układanki i wszystkich możliwy
 \includegraphics [scale=0.5]{przetworzone_DFS}
 \caption{Wykres przedstawiający średnią ilość stanów przetworzonych dla strategii DFS}
 \end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{dlugosc}
+\caption{Wykres przedstawiający średnią długość rozwiązania dla wszystkich badanych strategii}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{glebokosc}
+\caption{Wykres przedstawiający średnią maksymalną głębokość rozwiązania dla wszystkich badanych strategii}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{odwiedzone}
+\caption{Wykres przedstawiający średnią ilość stanów odwiedzonych dla wszystkich badanych strategii}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics [scale=0.5]{przetworzone}
+\caption{Wykres przedstawiający średnią ilość stanów przetworzonych dla wszystkich badanych strategii}
+\end{figure}
 }
 \newpage
 \section{Dyskusja}
-{\color{blue}
-Sekcja ta powinna zawierać dokładną interpretację uzyskanych wyników
-eksperymentów wraz ze szczegółowymi wnioskami z nich płynącymi. Najcenniejsze
-są, rzecz jasna, wnioski o charakterze uniwersalnym, które mogą być istotne
-przy innych, podobnych zadaniach. Należy również omówić i wyjaśnić wszystkie
-napotkane problemy (jeśli takie były). Każdy wniosek powinien mieć poparcie we
-wcześniej przeprowadzonych eksperymentach (odwołania do konkretnych wyników).
-Jest to jedna z najważniejszych sekcji tego sprawozdania, gdyż prezentuje
-poziom zrozumienia badanego problemu.}
+{Omówmy wszystkie analizowane wartości.
+\begin{enumerate}
+\item{ Średnia długość rozwiązania:}
+\newline Porównując cztery główne strategie widzimy, że w przypadku strategii DFS długość rozwiązania jest wyraźnie najdłuższa. Porównując dwie heurystki strategii A* widzimym, że średnie długości dla nich są niemal identyczne na wszystkich głebokościach. W przypadku strategii BFS wybór kolejności wykonywania ruchów (drugi argument programu) w żaden sposób nie wpływa na rozważaną wartość, w przeciwieństwie do strategii DFS gdzie widzimy że dla niektórych porządków wykonywania ruchów (np. ULDR i LURD) średnia długość rozwiązania już dla niskich głębokości przyjmuje wysokie wartości. W przypadku strategii BFS i A* można zauważyć, że wzrost długości rozwiązania do głębokości rozważanego układu rośnie mniej więcej liniowo, a w przypadku strategii DFS wzrost jest nieregularny.
+\item {Średnia głębokość rozwiązania:}
+\newline Wartości, które otrzymujemy na wykresie porównującym średnią maksymalną głębokość rozwiązania przyjmują niemalże identyczne proporcje jak wartości dotyczące długości znalezionego rozwiązania. Jedyną różnicą wartą odnotowania jest nieznaczne większe wartości przyjmowane w przypadku strategii DFS.
+\item {Stany odwiedzone i przetworzone}
+\newline Porównując rozważane strategie między sobą można wysunąć dwa następujące spostrzeżenia. Pierwsze to w jak bardzo znaczącym stopniu strategia DFS odbiega od pozostałych, tj. przyjmuje ona znacznie większe wartości niż pozostałe strategie. Drugie spostrzeżenie to że obie heurystyki rozważane dla strategii A* przyjmują radykalnie mniejsze wartości od strategii DFS i BFS. Analizując otrzymane wyniki dla strategii A* możemy zauważyć, że przy niskich wartościach głębokości układanek rezultaty otrzymane dla obu matryk (Hamminga i Manhattana) przyjmują bardzo zbliżone wartości. Jednak przy wyższych wartościach głębokości widzimy, że dla matryki Manhattana liczba przetworzonych i odwiedzonych stanów jest znacznie większa niż w przypadku metryki Hamminga, najbardziej jest to widoczne przy ostatniej rozważanej głębokości, czyli głębokości równej 7. W przypadku strategii BFS i DFS wzrost liczby odwiedzonych i przetworzonych stanów rośnie mniej więcej wykładniczo i jest porównywalny w obu strategiach. W przypadku strategii DFS widać większą różnicę pomiędzy różnymi porządkami wykonywania ruchów niż w przypadku strategii BFS.
+\end{enumerate}
+}
 
+\newpage
 \section{Wnioski}
-{\color{blue}
-W tej, przedostatniej, sekcji należy zamieścić podsumowanie najważniejszych
-wniosków z sekcji poprzedniej. Najlepiej jest je po prostu wypunktować. Znów,
-tak jak poprzednio, najistotniejsze są wnioski o charakterze uniwersalnym.}
+\begin{enumerate}
+\item Różnica liczb stanów odwiedzonych i przetworzonych dla poszczególnych algorytmów jest znacząca. Najgorzej w obu przypadkach wypada strategia przeszukiwania w głąb, gdzie względem najlepszego A* (w obu badanych metrykach) jest to różnica kilku rzędów wielkości.
+\item W przypadku strategii A*obie rozważane metodyki prezentują podobną wydajność. Różnice można zauważyć w przypadku liczby odwiedzonych i przetworzonych stanów, szczególne przy większych głębokościach.
+\item Zdecydowanie najgorzej wypadającą strategią znajdywania rozwiązania dla "Piętnastki" jest metoda przeszukiwania w głąb (DFS), która wypada najgorzej pod każdym badanym względem.
+\item Za najwydajniesze rozwiązanie można uznać strategię A*. Obie zastosowane metodyki wykazały się znacznie lepszą wydajnością niż strategie \textit{brute force} - BFS i DFS.
+\end{enumerate}
 
 \begin{thebibliography}{0}
   \bibitem{l2short} T. Oetiker, H. Partl, I. Hyna, E. Schlegl.
     \textsl{Nie za krótkie wprowadzenie do systemu \LaTeX2e}, 2007, dostępny
     online.
+  \bibitem{l2short} \url{https://en.wikipedia.org/wiki/A*_search_algorithm}
+  \bibitem{l2short} \url{https://en.wikipedia.org/wiki/15_puzzle}
+  
 \end{thebibliography}
-
-{\color{blue}
-Na końcu należy obowiązkowo podać cytowaną w sprawozdaniu literaturę, z której
-grupa korzystała w trakcie prac nad zadaniem.}
-
 \end{document}

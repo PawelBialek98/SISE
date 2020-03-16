@@ -28,11 +28,11 @@ public class PuzzleSaver {
 
     public void saveStats(String fileName, long timeStop, long timeStart, Solver solver) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
-            bw.write("Dlugosc znalezionego rozwiazania : " + len + "\n");
-            bw.write("Liczba stanow odwiedzonych : " + solver.getVisited() + "\n");
-            bw.write("Liczba stanow przetworzonych : " + solver.getProcessed() + "\n");
-            bw.write("Maksymalna osiagnieta glebokosc rekursji : " + solver.getDepth() + "\n");
-            bw.write("Czas rozwiazania : " + ((timeStop - timeStart) / 1000) / 1000.0 + " ms");
+            bw.write(/*"Dlugosc znalezionego rozwiazania : " +*/ len + "\n");
+            bw.write(/*"Liczba stanow odwiedzonych : " +*/ solver.getVisited() + "\n");
+            bw.write(/*"Liczba stanow przetworzonych : " +*/ solver.getProcessed() + "\n");
+            bw.write(/*"Maksymalna osiagnieta glebokosc rekursji : "*/ + solver.getDepth() + "\n");
+            bw.write(/*"Czas rozwiazania : "*/ + ((timeStop - timeStart) / 1000) / 1000.0 + " ms");
         } catch (IOException e) {
             e.printStackTrace();
         }

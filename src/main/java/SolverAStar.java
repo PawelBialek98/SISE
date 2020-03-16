@@ -49,18 +49,9 @@ public class SolverAStar implements Solver {
                     Puzzle newPuzzle = new Puzzle(puzzle);
                     newPuzzle.move(strategy[i]);
                     calculate(newPuzzle);
-                    //System.out.println("score" + newPuzzle.getScore());
                 }
             }
             processed++;
-            //System.out.println("next" + nextPuzzle.getScore());
-            //System.out.println(puzzle);
-            //System.out.println(processed);
-            //System.out.println("Best score" + puzzle.getScore());
-            //frontiers.add(nextPuzzle);
-            //if(processed == 20){
-            //    return null;
-            //}
         }
         return null;
     }
@@ -85,19 +76,18 @@ public class SolverAStar implements Solver {
                 }
             }
         }
-        //System.out.println("XD");
         return dist;
     }
 
     private int calculateManhattan(Puzzle puzzle){
         int dist = 0;
         int[][] puzzleTmp = puzzle.getPuzzle();
-        int[] coTOzaguwno;
+        int[] coordinates;
         for (int y = 0; y < puzzleTmp.length; ++y) {
             for (int x = 0; x < puzzleTmp[y].length; ++x) {
                 if (puzzleTmp[y][x] != puzzle.getCorrectPuzzle()[y][x]) {
-                    coTOzaguwno = calculateCoordinates(puzzle,puzzleTmp[y][x]);
-                    dist += Math.abs(y-coTOzaguwno[0]) + Math.abs(x-coTOzaguwno[1]);
+                    coordinates = calculateCoordinates(puzzle,puzzleTmp[y][x]);
+                    dist += Math.abs(y-coordinates[0]) + Math.abs(x-coordinates[1]);
                 }
             }
         }
@@ -106,10 +96,10 @@ public class SolverAStar implements Solver {
 
     private int[] calculateCoordinates(Puzzle puzzle,int number){
 
-        int[][] puzzleXD = puzzle.getCorrectPuzzle();
-        for (int y = 0; y < puzzleXD.length; ++y) {
-            for (int x = 0; x < puzzleXD[y].length; ++x) {
-                if (puzzleXD[y][x] == number) {
+        int[][] tmpPuzzle = puzzle.getCorrectPuzzle();
+        for (int y = 0; y < tmpPuzzle.length; ++y) {
+            for (int x = 0; x < tmpPuzzle[y].length; ++x) {
+                if (tmpPuzzle[y][x] == number) {
                     return new int[]{y,x};
                 }
             }
